@@ -116,6 +116,15 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to experie
 
 ---
 
+## 🏆 GitHub Badges & Achievements Integration
+
+GitAesthetic natively generates profile structures that seamlessly highlight your GitHub achievements:
+- **⭐ Starstruck**: Highlights your top open-source projects to drive organic stargazers.
+- **🦈 Pull Shark**: Automated PR workflows to keep active contribution momentum.
+- **⚡ Quickdraw & YOLO**: Built with standard Git conventions compatible with all developer badges.
+
+---
+
 ## 📄 Resume & Portfolio Summary
 
 > **GitAesthetic | Full-Stack Developer Platform & GitHub Automation Tool**
