@@ -13,7 +13,23 @@
     <img src="https://img.shields.io/badge/License-MIT-emerald?style=for-the-badge" alt="License" />
   </p>
 
+  <p align="center">
+    <code>npx git-aesthetic</code>
+  </p>
+
 </div>
+
+---
+
+## ⚡ Instant 1-Line Setup
+
+You don't even need to clone or install anything. Just run in your terminal:
+
+```bash
+npx git-aesthetic
+```
+
+It runs **100% locally on your machine**, uses your own Git credentials (no third-party tokens or passwords sent anywhere), and automates your entire GitHub profile in seconds.
 
 ---
 
