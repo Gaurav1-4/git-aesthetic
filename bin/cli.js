@@ -55,6 +55,12 @@ function detectUsername() {
   return "";
 }
 
+function escapeXmlForSvg(str) {
+  if (!str) return "";
+  // Unescaped & breaks XML parsing (xmlParseEntityRef) in SVG generation
+  return encodeURIComponent(str.replace(/&/g, "&amp;"));
+}
+
 // Markdown and workflow generators
 function generateMarkdown(opts) {
   const themes = {
@@ -73,9 +79,9 @@ function generateMarkdown(opts) {
 
   let md = `<div align="center">\n\n`;
 
-  // Header Banner
+  // Header Banner (XML entity safe)
   md += `  <!-- Animated Header Banner -->\n`;
-  md += `  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=${th.capsule}&height=220&section=header&text=${encodeURIComponent(displayName)}&fontSize=52&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=${encodeURIComponent(opts.tagline)}&descSize=18&descAlignY=62" width="100%" />\n\n`;
+  md += `  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=${th.capsule}&height=220&section=header&text=${escapeXmlForSvg(displayName)}&fontSize=52&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=${escapeXmlForSvg(opts.tagline)}&descSize=18&descAlignY=62" width="100%" />\n\n`;
 
   // Typing SVG
   if (opts.typingLines.length > 0) {
@@ -87,6 +93,13 @@ function generateMarkdown(opts) {
 
   // Badges
   md += `  <p align="center">\n`;
+  if (opts.website) {
+    md += `    <a href="${opts.website}" target="_blank">\n      <img src="https://img.shields.io/badge/Website-Live-10B981?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Website" />\n    </a>\n`;
+  }
+  if (opts.youtube) {
+    const ytHandle = opts.youtube.startsWith("@") ? opts.youtube : `@${opts.youtube}`;
+    md += `    <a href="https://youtube.com/${ytHandle}" target="_blank">\n      <img src="https://img.shields.io/badge/YouTube-${encodeURIComponent(ytHandle)}-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube" />\n    </a>\n`;
+  }
   if (opts.focus) {
     md += `    <img src="https://img.shields.io/badge/Focus-${encodeURIComponent(opts.focus)}-${th.badge}?style=for-the-badge&logo=github&logoColor=white" alt="Focus" />\n`;
   }
@@ -253,6 +266,9 @@ async function main() {
   const enable3dAns = await ask(rl, "7. Include 3D Isometric Contribution Graph? (Y/n)", "Y");
   const enable3d = enable3dAns.toLowerCase() !== "n";
 
+  const youtube = await ask(rl, "8. YouTube handle (optional, e.g. @Semlyhq or leave blank)", "");
+  const website = await ask(rl, "9. Personal / project website URL (optional, or leave blank)", "");
+
   const deployNowAns = await ask(
     rl,
     "\n🚀 Deploy directly to your GitHub profile repository now? (Y/n)",
@@ -267,9 +283,12 @@ async function main() {
     displayName,
     tagline,
     theme,
+    youtube,
+    website,
     focus: "Full-Stack & Cloud Architecture",
     location: "Global",
     about: "Building high-performance software and open-source tooling.",
+
     skills,
     typingLines: [
       `${tagline} 🚀`,

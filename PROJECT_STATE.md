@@ -14,3 +14,7 @@
 - [x] Packaged for NPM distribution (<22KB unpacked, ultra-lean)
 - [x] Successfully authenticated with NPM & published `git-aesthetic@1.0.0`
 - [x] Verified global `npx git-aesthetic` command execution
+- [x] Fixed capsule-render SVG XML entity escaping (`&amp;`) in both CLI and Web generator to prevent XML parse errors (`xmlParseEntityRef: no name`)
+- [x] Added YouTube and custom Website badges support to CLI questionnaire and web builder
+- [x] Bumped package version to `1.0.1`
+

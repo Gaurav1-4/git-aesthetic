@@ -25,6 +25,8 @@ export interface ProfileConfig {
   aboutText: string;
   focus: string;
   location: string;
+  youtube?: string;
+  website?: string;
   selectedSkills: string[];
   enableSnake: boolean;
   enable3dGraph: boolean;
@@ -33,3 +35,4 @@ export interface ProfileConfig {
   enableVisitorCounter: boolean;
   featuredRepos: { name: string; description?: string }[];
 }
+

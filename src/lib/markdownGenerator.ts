@@ -1,6 +1,12 @@
 import { ProfileConfig } from "@/types/profile";
 import { THEMES } from "./constants";
 
+function escapeXmlForSvg(str: string): string {
+  if (!str) return "";
+  // In capsule-render and other SVG generators, unescaped & breaks XML parsing (xmlParseEntityRef)
+  return encodeURIComponent(str.replace(/&/g, "&amp;"));
+}
+
 export function generateProfileMarkdown(config: ProfileConfig): string {
   const theme = THEMES[config.theme] || THEMES.tokyonight;
   const username = config.username.trim() || "github";
@@ -15,11 +21,11 @@ export function generateProfileMarkdown(config: ProfileConfig): string {
 
   let md = `<div align="center">\n\n`;
 
-  // 1. Header Banner
+  // 1. Header Banner (XML entity safe)
   md += `  <!-- Animated Header Banner -->\n`;
-  md += `  <img src="https://capsule-render.vercel.app/api?type=${config.headerType}&color=gradient&customColorList=${theme.capsuleColors}&height=220&section=header&text=${encodeURIComponent(
+  md += `  <img src="https://capsule-render.vercel.app/api?type=${config.headerType}&color=gradient&customColorList=${theme.capsuleColors}&height=220&section=header&text=${escapeXmlForSvg(
     displayName
-  )}&fontSize=52&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=${encodeURIComponent(
+  )}&fontSize=52&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=${escapeXmlForSvg(
     config.tagline
   )}&descSize=18&descAlignY=62" width="100%" />\n\n`;
 
@@ -34,6 +40,16 @@ export function generateProfileMarkdown(config: ProfileConfig): string {
   // 3. Badges Row
   md += `  <!-- Profile Badges -->\n`;
   md += `  <p align="center">\n`;
+  if (config.website) {
+    md += `    <a href="${config.website}" target="_blank">\n      <img src="https://img.shields.io/badge/Website-Live-10B981?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Website" />\n    </a>\n`;
+  }
+  if (config.youtube) {
+    const ytHandle = config.youtube.startsWith("@") ? config.youtube : `@${config.youtube}`;
+    const ytUrl = `https://www.youtube.com/${ytHandle}`;
+    md += `    <a href="${ytUrl}" target="_blank">\n      <img src="https://img.shields.io/badge/YouTube-${encodeURIComponent(
+      ytHandle
+    )}-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube" />\n    </a>\n`;
+  }
   if (config.focus) {
     md += `    <img src="https://img.shields.io/badge/Focus-${encodeURIComponent(
       config.focus

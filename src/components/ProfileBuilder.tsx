@@ -184,6 +184,34 @@ export const ProfileBuilder: React.FC<ProfileBuilderProps> = ({
                 </div>
               </div>
 
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-medium text-neutral-300 mb-1">
+                    YouTube Channel / Handle
+                  </label>
+                  <input
+                    type="text"
+                    value={config.youtube || ""}
+                    onChange={(e) => updateField("youtube", e.target.value)}
+                    className="w-full rounded-lg border border-white/10 bg-[#0d1117] px-3 py-2 text-xs text-white focus:border-cyan-500 focus:outline-none"
+                    placeholder="@Semlyhq"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-medium text-neutral-300 mb-1">
+                    Website URL
+                  </label>
+                  <input
+                    type="text"
+                    value={config.website || ""}
+                    onChange={(e) => updateField("website", e.target.value)}
+                    className="w-full rounded-lg border border-white/10 bg-[#0d1117] px-3 py-2 text-xs text-white focus:border-cyan-500 focus:outline-none"
+                    placeholder="https://www.semly.in"
+                  />
+                </div>
+              </div>
+
+
               <div>
                 <label className="block text-xs font-medium text-neutral-300 mb-1">
                   About Me / Bio

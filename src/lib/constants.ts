@@ -124,6 +124,8 @@ export const DEFAULT_PROFILE: ProfileConfig = {
   aboutText: "Building intuitive, high-performance AI and computer vision software from scratch.",
   focus: "AI & Computer Vision",
   location: "India",
+  youtube: "@Semlyhq",
+  website: "https://www.semly.in",
   selectedSkills: [
     "python",
     "pytorch",
