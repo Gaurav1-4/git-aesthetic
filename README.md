@@ -7,6 +7,9 @@
   </p>
 
   <p align="center">
+    <a href="https://www.npmjs.com/package/git-aesthetic">
+      <img src="https://img.shields.io/npm/v/git-aesthetic?style=for-the-badge&logo=npm&color=CB3837" alt="NPM Version" />
+    </a>
     <img src="https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js" />
     <img src="https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
     <img src="https://img.shields.io/badge/Tailwind-3.4-38bdf8?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind" />
